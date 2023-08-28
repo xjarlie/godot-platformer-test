@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5h7y0l8dlamv"]
+
+[ext_resource type="Script" path="res://level_1.gd" id="1_aqseu"]
+[ext_resource type="PackedScene" uid="uid://buma1gi277ucy" path="res://platform.tscn" id="2_7f8i2"]
+
+[node name="Level1" type="Node"]
+script = ExtResource("1_aqseu")
+
+[node name="Platform" parent="." instance=ExtResource("2_7f8i2")]
+position = Vector2(296, 576)
+
+[node name="Platform2" parent="." instance=ExtResource("2_7f8i2")]
+position = Vector2(640, 456)
+
+[node name="Platform3" parent="." instance=ExtResource("2_7f8i2")]
+position = Vector2(976, 312)
+
+[node name="Platform4" parent="." instance=ExtResource("2_7f8i2")]
+position = Vector2(656, 184)

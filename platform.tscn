@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://buma1gi277ucy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_to2xk"]
+friction = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4tdit"]
+size = Vector2(256, 32)
+
+[node name="Platform" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_to2xk")
+gravity_scale = 0.0
+freeze = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -16.0
+offset_right = 128.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4tdit")
