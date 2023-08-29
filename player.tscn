@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://olqxhgvjuh1q" path="res://rightbig.png" id="1_yrsig"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ect4e"]
-radius = 24.0
-height = 128.0
+radius = 25.0
+height = 136.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_a8vfd")
@@ -16,3 +16,7 @@ texture = ExtResource("1_yrsig")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ect4e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
