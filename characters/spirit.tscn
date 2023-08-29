@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://docmwitkx5h8r"]
+
+[ext_resource type="Script" path="res://characters/spirit.gd" id="1_qp7jx"]
+[ext_resource type="PackedScene" uid="uid://buma1gi277ucy" path="res://utilities/platform.tscn" id="2_hf4fn"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j4hsc"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbhr8"]
+size = Vector2(32, 32)
+
+[node name="Spirit" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_qp7jx")
+platform_scene = ExtResource("2_hf4fn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("PlaceholderTexture2D_j4hsc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qbhr8")
+
+[node name="MoonPlatform" parent="." instance=ExtResource("2_hf4fn")]
+scale = Vector2(0.4, 0.7)
+collision_layer = 8
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://d37vnfrgv5lnn"]
+[gd_scene load_steps=5 format=3 uid="uid://d37vnfrgv5lnn"]
 
-[ext_resource type="PackedScene" uid="uid://c5h7y0l8dlamv" path="res://level_1.tscn" id="1_dujye"]
+[ext_resource type="PackedScene" uid="uid://c5h7y0l8dlamv" path="res://levels/level_1.tscn" id="1_dujye"]
 [ext_resource type="PackedScene" uid="uid://dla4ftsp6k3ic" path="res://player.tscn" id="2_4yrv4"]
+[ext_resource type="PackedScene" uid="uid://vgb0006pn3p6" path="res://levels/level_2.tscn" id="3_new8g"]
+[ext_resource type="PackedScene" uid="uid://docmwitkx5h8r" path="res://spirit.tscn" id="4_w1br4"]
 
 [node name="Main" type="Node"]
-
-[node name="Level1" parent="." instance=ExtResource("1_dujye")]
 
 [node name="Player" parent="." instance=ExtResource("2_4yrv4")]
 position = Vector2(296, 456)
 scale = Vector2(0.5, 0.5)
+
+[node name="Spirit" parent="." instance=ExtResource("4_w1br4")]
+
+[node name="Level1" parent="." instance=ExtResource("1_dujye")]
+
+[node name="Level2" parent="." instance=ExtResource("3_new8g")]
+position = Vector2(1000, 1000)

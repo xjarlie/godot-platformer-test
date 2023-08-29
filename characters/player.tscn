@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dla4ftsp6k3ic"]
+
+[ext_resource type="Script" path="res://characters/player.gd" id="1_gm1ia"]
+[ext_resource type="Texture2D" uid="uid://olqxhgvjuh1q" path="res://assets/rightbig.png" id="2_j3ali"]
+[ext_resource type="Script" path="res://characters/player_camera.gd" id="3_ohe28"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ect4e"]
+radius = 25.0
+height = 136.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 11
+script = ExtResource("1_gm1ia")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_j3ali")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ect4e")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("3_ohe28")
