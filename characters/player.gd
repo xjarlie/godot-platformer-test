@@ -11,14 +11,19 @@ extends CharacterBody2D
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 enum states {IDLE, RUN, JUMP};
+var last_on_floor = 0;
+var mercy_frames = 10;
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
+	var CURRENT_FRAME = Engine.get_physics_frames();
+	if is_on_floor():
+		last_on_floor = CURRENT_FRAME;
+	else:
 		velocity.y += gravity * delta
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and (CURRENT_FRAME < last_on_floor + mercy_frames):
 		velocity.y = -JUMP_SPEED
 
 	# Get the input direction and handle the movement/deceleration.
