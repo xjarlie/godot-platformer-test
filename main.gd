@@ -19,7 +19,7 @@ func _process(delta):
 func _physics_process(delta):
 	
 	if ($Player.is_on_floor()):
-		$Spirit.regen_stamina(1);
+		$Spirit.regen_stamina(2);
 
 
 
