@@ -11,13 +11,21 @@ var state: STATES = STATES.MOVE;
 
 var touching_mouse = false;
 
+const STARTING_STAMINA = 100;
+var stamina = STARTING_STAMINA;
+
 var gameState = {
 	"leftAction": "platform"
 }
 
 func _ready():
+	begin();
+
+func begin():
 	$MoonPlatform.hide();
 	$MoonPlatform.get_node("CollisionShape2D").disabled = true;
+	position = get_global_mouse_position();
+	stamina = STARTING_STAMINA;
 
 func _physics_process(delta):
 	
@@ -46,16 +54,27 @@ func _physics_process(delta):
 			
 		
 		move_and_slide()
+	elif (state == STATES.STATIC):
+		stamina -= 1;
 
 func _process(delta):
+	#print(stamina);
 	if (Input.is_action_pressed("left_click")):
 		if (gameState.leftAction == "platform"):
-			if (touching_mouse):
+			if (touching_mouse && stamina > 0):
 				state = STATES.STATIC;
 			
 				$MoonPlatform.show();
 				$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", false);
 				$Sprite2D.hide();
+			
+			if (state == STATES.STATIC):
+				if (stamina == 0):
+					state = STATES.MOVE;
+			
+					$MoonPlatform.hide();
+					$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", true);
+					$Sprite2D.show();
 			
 	if (Input.is_action_just_released("left_click")):
 		if (gameState.leftAction == "platform"):
@@ -64,6 +83,12 @@ func _process(delta):
 			$MoonPlatform.hide();
 			$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", true);
 			$Sprite2D.show();
+
+func regen_stamina(amt: int):
+	if (stamina + amt > STARTING_STAMINA):
+		stamina = STARTING_STAMINA;
+	else:
+		stamina += amt;
 
 func _on_mouse_entered():
 	touching_mouse = true;

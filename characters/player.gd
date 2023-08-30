@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 enum states {IDLE, RUN, JUMP};
 var last_on_floor = 0;
-var mercy_frames = 10;
+var mercy_frames = 5;
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -21,7 +21,6 @@ func _physics_process(delta):
 		last_on_floor = CURRENT_FRAME;
 	else:
 		velocity.y += gravity * delta
-
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and (CURRENT_FRAME < last_on_floor + mercy_frames):
 		velocity.y = -JUMP_SPEED
@@ -45,3 +44,7 @@ func _physics_process(delta):
 	
 	
 
+func is_on_ground():
+	print(get_slide_collision_count() > 1);
+	return true;
+		

@@ -25,6 +25,8 @@ shape = SubResource("RectangleShape2D_qbhr8")
 [node name="MoonPlatform" parent="." instance=ExtResource("2_hf4fn")]
 scale = Vector2(0.4, 0.7)
 collision_layer = 8
+max_contacts_reported = 50
+contact_monitor = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
