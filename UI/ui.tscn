@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3jpfmrelhywk"]
+
+[ext_resource type="Script" path="res://UI/ui.gd" id="1_r3hh8"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_r3hh8")
+
+[node name="PauseButton" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 71.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 32
+text = "pause"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -327.0
+offset_top = 8.0
+offset_right = -7.0
+offset_bottom = 48.0
+grow_horizontal = 0
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
