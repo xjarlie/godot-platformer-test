@@ -41,10 +41,7 @@ func _physics_process(delta):
 		$Sprite2D.set_flip_h(true);
 		
 	move_and_slide()
-	
-	
 
-func is_on_ground():
-	print(get_slide_collision_count() > 1);
-	return true;
-		
+
+func is_on_solid_ground():
+	return (is_on_floor() && get_last_slide_collision() && get_last_slide_collision().get_collider().get_groups().has("solid_platform"));

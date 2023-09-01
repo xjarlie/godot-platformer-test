@@ -14,3 +14,6 @@ func _process(delta):
 
 func _on_pause_button_pressed():
 	pause.emit();
+
+func update_stamina(value: int):
+	$StaminaBar.value = value;
