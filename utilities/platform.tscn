@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://buma1gi277ucy"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_to2xk"]
-friction = 0.1
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5r77s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tdit"]
 size = Vector2(256, 32)
@@ -9,7 +8,7 @@ size = Vector2(256, 32)
 [node name="Platform" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 5
-physics_material_override = SubResource("PhysicsMaterial_to2xk")
+physics_material_override = SubResource("PhysicsMaterial_5r77s")
 gravity_scale = 0.0
 freeze = true
 

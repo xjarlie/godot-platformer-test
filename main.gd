@@ -22,6 +22,7 @@ func _physics_process(delta):
 
 func pause_game():
 	$PauseMenu.show();
+	$UI.hide();
 	get_tree().paused = true;
 
 func _on_pause_menu_restart():

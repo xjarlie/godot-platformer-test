@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var SPEED = 300.0
 @export var JUMP_SPEED = 900.0
-@export_range(0.0, 1.0) var friction = 0.1;
+@export_range(0.0, 1.0) var friction = 0.4;
 @export_range(0.0, 1.0) var acceleration = 0.25;
 @export var gravity = 3000;
 
@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 enum states {IDLE, RUN, JUMP};
 var last_on_floor = 0;
-var mercy_frames = 5;
+var mercy_frames = 6;
 
 func _physics_process(delta):
 	# Add the gravity.
