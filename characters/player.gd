@@ -41,6 +41,12 @@ func _physics_process(delta):
 		$Sprite2D.set_flip_h(true);
 		
 	move_and_slide()
+	
+func _process(_delta):
+	if (Input.is_action_pressed("move_down") && is_on_floor()):
+		$Camera2D.offset.y = lerp($Camera2D.offset.y, 200.0, 0.03);
+	else:
+		$Camera2D.offset.y = lerp($Camera2D.offset.y, 0.0, 0.03);
 
 
 func is_on_solid_ground():

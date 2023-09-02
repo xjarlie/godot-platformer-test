@@ -1,6 +1,5 @@
 extends Node
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	begin();
@@ -18,7 +17,6 @@ func _process(delta):
 		pause_game()
 		
 func _physics_process(delta):
-	
 	if ($Player.is_on_solid_ground()):
 		$Spirit.regen_stamina(2);
 
@@ -33,3 +31,13 @@ func _on_pause_menu_restart():
 
 func _on_ui_pause():
 	pause_game();
+
+func _on_pause_menu_resume():
+	$UI.show();
+
+
+func _on_ui_moon_spirit_action_change(action):
+	if (action == "platform_action"):
+		$Spirit.gameState.left_action = "platform";
+	elif (action == "default_action"):
+		$Spirit.gameState.left_action = "default";

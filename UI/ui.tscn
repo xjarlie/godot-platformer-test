@@ -1,12 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3jpfmrelhywk"]
+[gd_scene load_steps=8 format=3 uid="uid://d3jpfmrelhywk"]
 
 [ext_resource type="Script" path="res://UI/ui.gd" id="1_r3hh8"]
+[ext_resource type="ButtonGroup" uid="uid://dg2ebbdaat0tp" path="res://UI/action_buttons.tres" id="2_wns60"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_o11pg"]
 size = Vector2(500, 32)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uve2m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2auf5"]
+texture = SubResource("PlaceholderTexture2D_uve2m")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_a4ry6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_llpqe"]
+texture = SubResource("PlaceholderTexture2D_a4ry6")
+
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_r3hh8")
+action_button_group = ExtResource("2_wns60")
 
 [node name="PauseButton" type="Button" parent="."]
 offset_left = 16.0
@@ -26,5 +38,33 @@ offset_right = -7.0
 offset_bottom = 108.0
 grow_horizontal = 0
 texture_progress = SubResource("PlaceholderTexture2D_o11pg")
+
+[node name="ActionSelect" type="VBoxContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -26.5
+offset_right = 119.0
+offset_bottom = 26.5
+grow_vertical = 2
+
+[node name="Default" type="Button" parent="ActionSelect" groups=["default_action"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2auf5")
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+button_group = ExtResource("2_wns60")
+text = "default"
+
+[node name="Platform" type="Button" parent="ActionSelect" groups=["platform_action"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/pressed = SubResource("StyleBoxTexture_llpqe")
+toggle_mode = true
+action_mode = 0
+button_group = ExtResource("2_wns60")
+text = "platform"
 
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
