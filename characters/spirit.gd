@@ -41,6 +41,15 @@ func _physics_process(delta):
 				actual_max = high_max_speed;
 	
 			velocity += direction * acceleration * delta * extra;
+			#velocity = lerp(velocity, direction * 1000 * delta, acceleration);
+			
+			var next_frame_pos = position + velocity;
+			var next_direction = (mouse - next_frame_pos);
+			var will_cross_x = (next_direction.x * direction.x) > 0;
+			var will_cross_y = (next_direction.y * direction.y) > 0;
+			if (will_cross_x && will_cross_y):
+				velocity = Vector2.ZERO;
+				position = mouse;
 	
 			if (velocity.length() > actual_max):
 				velocity = velocity.normalized() * actual_max;
