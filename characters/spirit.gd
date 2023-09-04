@@ -11,7 +11,7 @@ var state: STATES = STATES.MOVE;
 
 var touching_mouse = false;
 
-const STARTING_STAMINA = 100;
+const STARTING_STAMINA = 50;
 var stamina = STARTING_STAMINA;
 
 var gameState = {
