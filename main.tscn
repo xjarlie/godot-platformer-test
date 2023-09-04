@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://crib5uhxtcxxy" path="res://UI/pause_menu.tscn" id="6_b1kn6"]
 [ext_resource type="PackedScene" uid="uid://d3jpfmrelhywk" path="res://UI/ui.tscn" id="7_d1uob"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_vnwik"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_et2sp"]
 
 [node name="Main" type="Node"]
 process_mode = 1
@@ -23,7 +23,7 @@ scale = Vector2(0.5, 0.5)
 visible = false
 
 [node name="UI" parent="." instance=ExtResource("7_d1uob")]
-action_button_group = SubResource("ButtonGroup_vnwik")
+action_button_group = SubResource("ButtonGroup_et2sp")
 
 [node name="Level3" parent="." instance=ExtResource("6_4ce71")]
 
