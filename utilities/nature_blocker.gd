@@ -5,7 +5,7 @@ var force_field_strength = 300;
 
 var player_inside = false;
 var player_body: CharacterBody2D;
-var player_velocities = Array();
+var player_action = "down";
 
 var spirit_inside = false;
 var spirit_body: CharacterBody2D;
@@ -25,7 +25,6 @@ func _physics_process(delta):
 	if (disabled):
 		return;
 	if (player_inside):
-		get_tree().get_first_node_in_group("spirit").regen_stamina(9999999999)
 		var disp_to_player = (player_body.position - position);
 		#const C = 10000;
 		#var dist_to_player = disp_to_player.length()
@@ -34,12 +33,16 @@ func _physics_process(delta):
 		#player_body.velocity += direction * magnitude;
 		#player_body.velocity.bounce(disp_to_player.normalized());
 		print(player_body.velocity);
-		if (true):
-			var final_v = disp_to_player.normalized() * force_field_strength;
-			player_body.velocity = lerp(player_body.velocity, final_v, 0.5);
-			player_body.velocity.y -= 300;
-		else:
-			player_body.velocity.y -= force_field_strength;
+		var final_v = disp_to_player.normalized() * force_field_strength;
+		player_body.velocity = lerp(player_body.velocity, final_v, 0.5);
+		if (player_body.position.y > position.y):
+			player_body.velocity.y += 200;
+			player_action = "down";
+		else: 
+			get_tree().get_first_node_in_group("spirit").regen_stamina(9999999999)
+			player_body.velocity.y -= 500;
+			player_action = "jump";
+
 	
 	if (spirit_inside):
 		var disp_to_spirit = (spirit_body.position - position);
@@ -59,8 +62,9 @@ func _on_body_exited(body):
 	if (body.is_in_group("player")):
 		player_inside = false;
 		
-		$DisableTimer.start();
-		disable();
+		if (player_action == "jump"):
+			$DisableTimer.start();
+			disable();
 	elif body.is_in_group("spirit"):
 		spirit_inside = false;
 
