@@ -30,11 +30,12 @@ func begin():
 func _physics_process(delta):
 	
 	if (state == STATES.MOVE):
+		var mouse = get_global_mouse_position();
+		var direction = (mouse - position);
 		if (touching_mouse == false):
 			var extra = 1;
 			var actual_max = max_speed;
-			var mouse = get_global_mouse_position();
-			var direction = (mouse - position);
+			
 			
 			if (Input.is_action_pressed("left_click")):
 				#extra = 2;
@@ -58,7 +59,7 @@ func _physics_process(delta):
 				velocity = (get_global_mouse_position() - position) * 10;
 			
 		else:
-			velocity = (get_global_mouse_position() - position) * 10;
+			velocity = direction * 10;
 			pass;
 			
 		

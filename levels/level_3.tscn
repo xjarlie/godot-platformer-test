@@ -100,4 +100,12 @@ text = "YOU WINNNN"
 position = Vector2(1584, 1152)
 force_field_radius = 200
 
+[node name="NatureBlocker3" parent="." instance=ExtResource("7_vjkf5")]
+position = Vector2(1920, 616)
+force_field_radius = 200
+
+[node name="NatureBlocker2" parent="." instance=ExtResource("7_vjkf5")]
+position = Vector2(2640, 695)
+force_field_radius = 200
+
 [connection signal="body_entered" from="WinArea" to="." method="_on_win_area_body_entered"]

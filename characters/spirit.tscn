@@ -9,7 +9,7 @@ size = Vector2(32, 32)
 [sub_resource type="CircleShape2D" id="CircleShape2D_u02wo"]
 radius = 16.0
 
-[node name="Spirit" type="CharacterBody2D"]
+[node name="Spirit" type="CharacterBody2D" groups=["spirit"]]
 collision_layer = 4
 collision_mask = 0
 input_pickable = true
