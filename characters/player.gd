@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+signal death;
 
 @export var SPEED = 300.0
 @export var JUMP_SPEED = 900.0
@@ -7,12 +8,18 @@ extends CharacterBody2D
 @export_range(0.0, 1.0) var acceleration = 0.25;
 @export var gravity = 3000;
 
+@export var max_health = 100;
+var health = max_health;
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 enum states {IDLE, RUN, JUMP};
 var last_on_floor = 0;
 var mercy_frames = 6;
+
+func begin():
+	health = max_health;
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -40,7 +47,8 @@ func _physics_process(delta):
 	elif velocity.x < 0:
 		$Sprite2D.set_flip_h(true);
 		
-	move_and_slide()
+	move_and_slide();
+	resolve_health();
 	
 func _process(_delta):
 	if (Input.is_action_pressed("move_down") && is_on_floor()):
@@ -48,6 +56,23 @@ func _process(_delta):
 	else:
 		$Camera2D.offset.y = lerp($Camera2D.offset.y, 0.0, 0.03);
 
+func damage(amt: int):
+	health -= amt;
+
+func heal(amt: int):
+	health += amt;
+	
+func resolve_health():
+	if (health <= 0):
+		health = 0;
+		die();
+	if (health > max_health):
+		health = max_health;
+	print(health);
+
+func die():
+	print("dead");
+	death.emit();
 
 func is_on_solid_ground():
 	return (is_on_floor() && get_last_slide_collision() && get_last_slide_collision().get_collider().get_groups().has("solid_platform"));

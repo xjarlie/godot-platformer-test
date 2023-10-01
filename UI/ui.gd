@@ -24,3 +24,6 @@ func _on_pause_button_pressed():
 
 func update_stamina(value: int):
 	$StaminaBar.value = value;
+	
+func update_health(value: int):
+	$HealthBar.value = value;

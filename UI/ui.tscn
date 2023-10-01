@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d3jpfmrelhywk"]
+[gd_scene load_steps=10 format=3 uid="uid://d3jpfmrelhywk"]
 
 [ext_resource type="Script" path="res://UI/ui.gd" id="1_r3hh8"]
 [ext_resource type="ButtonGroup" uid="uid://dg2ebbdaat0tp" path="res://UI/action_buttons.tres" id="2_wns60"]
@@ -16,15 +16,22 @@ texture = SubResource("PlaceholderTexture2D_uve2m")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_llpqe"]
 texture = SubResource("PlaceholderTexture2D_a4ry6")
 
+[sub_resource type="Gradient" id="Gradient_1n7xu"]
+offsets = PackedFloat32Array(0, 0.00699301, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.944056, 0.944056, 0.944056, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ij45s"]
+gradient = SubResource("Gradient_1n7xu")
+
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_r3hh8")
 action_button_group = ExtResource("2_wns60")
 
 [node name="PauseButton" type="Button" parent="."]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 71.0
-offset_bottom = 47.0
+offset_left = 944.0
+offset_top = 24.0
+offset_right = 1045.0
+offset_bottom = 77.0
 theme_override_font_sizes/font_size = 32
 text = "pause"
 
@@ -69,5 +76,12 @@ toggle_mode = true
 action_mode = 0
 button_group = ExtResource("2_wns60")
 text = "platform"
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 568.0
+offset_bottom = 80.0
+texture_progress = SubResource("GradientTexture1D_ij45s")
 
 [connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
