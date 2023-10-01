@@ -68,7 +68,6 @@ func resolve_health():
 		die();
 	if (health > max_health):
 		health = max_health;
-	print(health);
 
 func die():
 	print("dead");

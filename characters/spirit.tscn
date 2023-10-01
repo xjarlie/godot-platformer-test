@@ -26,5 +26,14 @@ shape = SubResource("CircleShape2D_u02wo")
 scale = Vector2(0.4, 0.7)
 collision_layer = 8
 
+[node name="SlashArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 256
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlashArea"]
+rotation = 6.28319
+scale = Vector2(6.90119, 6.90119)
+polygon = PackedVector2Array(0, 0, 10, 4.5, 10, -4.5)
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,13 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://d37vnfrgv5lnn"]
+[gd_scene load_steps=10 format=3 uid="uid://d37vnfrgv5lnn"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_0wwqc"]
 [ext_resource type="PackedScene" uid="uid://f2esgyghoibm" path="res://characters/player.tscn" id="2_4yrv4"]
 [ext_resource type="PackedScene" uid="uid://docmwitkx5h8r" path="res://characters/spirit.tscn" id="4_w1br4"]
 [ext_resource type="PackedScene" uid="uid://fpeddlqhu4gb" path="res://levels/level_3.tscn" id="6_4ce71"]
 [ext_resource type="PackedScene" uid="uid://crib5uhxtcxxy" path="res://UI/pause_menu.tscn" id="6_b1kn6"]
+[ext_resource type="PackedScene" uid="uid://c5tngn823lbq2" path="res://UI/radial_action_select.tscn" id="7_2l3jm"]
 [ext_resource type="PackedScene" uid="uid://d3jpfmrelhywk" path="res://UI/ui.tscn" id="7_d1uob"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_bb50f"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_4e7nr"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_xmfxd"]
 
 [node name="Main" type="Node"]
 process_mode = 1
@@ -23,12 +26,18 @@ scale = Vector2(0.5, 0.5)
 visible = false
 
 [node name="UI" parent="." instance=ExtResource("7_d1uob")]
-action_button_group = SubResource("ButtonGroup_bb50f")
 
 [node name="Level3" parent="." instance=ExtResource("6_4ce71")]
+
+[node name="RadialActionSelect" parent="." instance=ExtResource("7_2l3jm")]
+visible = false
+left_action_group = SubResource("ButtonGroup_4e7nr")
+right_action_group = SubResource("ButtonGroup_xmfxd")
 
 [connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="restart" from="PauseMenu" to="." method="_on_pause_menu_restart"]
 [connection signal="resume" from="PauseMenu" to="." method="_on_pause_menu_resume"]
 [connection signal="moon_spirit_action_change" from="UI" to="." method="_on_ui_moon_spirit_action_change"]
 [connection signal="pause" from="UI" to="." method="_on_ui_pause"]
+[connection signal="left_action_updated" from="RadialActionSelect" to="." method="_on_radial_action_select_left_action_updated"]
+[connection signal="right_action_updated" from="RadialActionSelect" to="." method="_on_radial_action_select_right_action_updated"]

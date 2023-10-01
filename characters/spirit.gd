@@ -11,11 +11,12 @@ var state: STATES = STATES.MOVE;
 
 var touching_mouse = false;
 
-const STARTING_STAMINA = 50;
+const STARTING_STAMINA = 200;
 var stamina = STARTING_STAMINA;
 
 var gameState = {
-	"left_action": "platform"
+	"left_action": "platform",
+	"right_action": "orb"
 }
 
 func _ready():
@@ -28,47 +29,79 @@ func begin():
 	stamina = STARTING_STAMINA;
 
 func _physics_process(delta):
-	
-	if (state == STATES.MOVE):
-		var mouse = get_global_mouse_position();
-		var direction = (mouse - position);
-		if (touching_mouse == false):
-			var extra = 1;
-			var actual_max = max_speed;
+	var mouse = get_global_mouse_position();
+	var direction_to_mouse = (mouse - position);
+	if (gameState.left_action == "platform"):
+		if (state == STATES.MOVE):	
+			
+			if (touching_mouse == false):
+				var extra = 1;
+				var actual_max = max_speed;
 			
 			
-			if (Input.is_action_pressed("left_click")):
-				#extra = 2;
-				actual_max = high_max_speed;
-	
-			velocity += direction * acceleration * delta * extra;
-			#velocity = lerp(velocity, direction * 1000 * delta, acceleration);
-			
-			var next_frame_pos = position + velocity;
-			var next_direction = (mouse - next_frame_pos);
-			var will_cross_x = (next_direction.x * direction.x) > 0;
-			var will_cross_y = (next_direction.y * direction.y) > 0;
-			if (will_cross_x && will_cross_y):
-				velocity = Vector2.ZERO;
-				position = mouse;
-	
-			if (velocity.length() > actual_max):
-				velocity = velocity.normalized() * actual_max;
-				
-			if ((mouse - position).length() < 100 && !Input.is_action_pressed("left_click")):
-				velocity = (get_global_mouse_position() - position) * 10;
-			
-		else:
-			velocity = direction * 10;
-			pass;
-			
+				if (Input.is_action_pressed("left_click")):
+					#extra = 2;
+					actual_max = high_max_speed;
 		
-		move_and_slide()
-	elif (state == STATES.STATIC):
-		stamina -= 1;
+				velocity += direction_to_mouse * acceleration * delta * extra;
+				#velocity = lerp(velocity, direction * 1000 * delta, acceleration);
+			
+				var next_frame_pos = position + velocity;
+				var next_direction = (mouse - next_frame_pos);
+				var will_cross_x = (next_direction.x * direction_to_mouse.x) > 0;
+				var will_cross_y = (next_direction.y * direction_to_mouse.y) > 0;
+				if (will_cross_x && will_cross_y):
+					velocity = Vector2.ZERO;
+					position = mouse;
+		
+				if (velocity.length() > actual_max):
+					velocity = velocity.normalized() * actual_max;
+					
+				if ((mouse - position).length() < 100 && !Input.is_action_pressed("left_click")):
+					velocity = (get_global_mouse_position() - position) * 10;
+				
+			else:
+				velocity = direction_to_mouse * 10;
+				pass;
+
+			move_and_slide()
+		elif (state == STATES.STATIC):
+			stamina -= 2;
+	elif (gameState.left_action == "slash"):
+		position = get_tree().get_first_node_in_group("player").position;
+		direction_to_mouse = (mouse - position);
+		if (Input.is_action_just_pressed("left_click")):
+			var mouse_angle = direction_to_mouse.angle();
+			print("attack", mouse_angle);
+			
+			var intervals = [
+				0,
+				PI/16,
+				7*PI/16,
+				9*PI/16,
+				15*PI/16,
+				PI
+			];
+			var attack_angles = [
+				-PI, -3*PI/4, -PI/2, -PI/4, 0, PI/4, PI/2, 3*PI/4, PI
+			]
+			var current = attack_angles[0];
+			for i in 9:
+				if abs(mouse_angle - attack_angles[i]) < abs(mouse_angle - current):
+					current = attack_angles[i];
+			
+			var rounded_angle = current;
+			print(rounded_angle);
 
 func _process(delta):
 	#print(stamina);
+	
+	if (gameState.left_action != "platform"):
+		#hide();
+		pass;
+	else:
+		show();
+	
 	if (Input.is_action_pressed("left_click")):
 		if (gameState.left_action == "platform"):
 			if (touching_mouse && stamina > 0):
@@ -94,7 +127,7 @@ func _process(delta):
 			$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", true);
 			$Sprite2D.show();
 
-func regen_stamina(amt: int):
+func regen_stamina(amt):
 	if (stamina + amt > STARTING_STAMINA):
 		stamina = STARTING_STAMINA;
 	else:

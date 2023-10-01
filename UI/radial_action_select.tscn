@@ -1,0 +1,78 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5tngn823lbq2"]
+
+[ext_resource type="ButtonGroup" uid="uid://dg2ebbdaat0tp" path="res://UI/action_buttons.tres" id="1_d4cid"]
+[ext_resource type="Script" path="res://UI/radial_action_select.gd" id="1_squqj"]
+[ext_resource type="ButtonGroup" uid="uid://bv3mkt0eub2fv" path="res://UI/right_actions.tres" id="2_kshkx"]
+
+[node name="RadialActionSelect" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -64.0
+offset_right = 124.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_squqj")
+left_action_group = ExtResource("1_d4cid")
+right_action_group = ExtResource("2_kshkx")
+
+[node name="PlatformOption" type="Button" parent="." groups=["platform"]]
+offset_left = -148.0
+offset_top = -20.0
+offset_right = -72.0
+offset_bottom = 11.0
+toggle_mode = true
+button_group = ExtResource("1_d4cid")
+text = "Platform"
+
+[node name="SlashOption" type="Button" parent="." groups=["slash"]]
+offset_left = -140.0
+offset_top = -76.0
+offset_right = -91.0
+offset_bottom = -45.0
+toggle_mode = true
+button_group = ExtResource("1_d4cid")
+text = "Slash"
+
+[node name="JavelinOption" type="Button" parent="." groups=["javelin"]]
+offset_left = 92.0
+offset_top = -20.0
+offset_right = 151.0
+offset_bottom = 11.0
+toggle_mode = true
+button_group = ExtResource("2_kshkx")
+text = "Javelin"
+
+[node name="OrbOption" type="Button" parent="." groups=["orb"]]
+offset_left = 100.0
+offset_top = -76.0
+offset_right = 138.0
+offset_bottom = -45.0
+toggle_mode = true
+button_group = ExtResource("2_kshkx")
+text = "Orb"
+
+[node name="LeftLabel" type="Label" parent="."]
+offset_left = -148.0
+offset_top = -108.0
+offset_right = -65.0
+offset_bottom = -82.0
+text = "Left action"
+
+[node name="RightLabel" type="Label" parent="."]
+offset_left = 68.0
+offset_top = -108.0
+offset_right = 164.0
+offset_bottom = -82.0
+text = "Right action
+"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
