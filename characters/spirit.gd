@@ -32,6 +32,8 @@ func _physics_process(delta):
 	var mouse = get_global_mouse_position();
 	var direction_to_mouse = (mouse - position);
 	if (gameState.left_action == "platform"):
+		# PLATFORM MECHANICS
+		
 		if (state == STATES.MOVE):	
 			
 			if (touching_mouse == false):
@@ -68,20 +70,14 @@ func _physics_process(delta):
 		elif (state == STATES.STATIC):
 			stamina -= 2;
 	elif (gameState.left_action == "slash"):
+		# SLASH ATTACK MECHANICS
+		
 		position = get_tree().get_first_node_in_group("player").position;
 		direction_to_mouse = (mouse - position);
 		if (Input.is_action_just_pressed("left_click")):
 			var mouse_angle = direction_to_mouse.angle();
 			print("attack", mouse_angle);
 			
-			var intervals = [
-				0,
-				PI/16,
-				7*PI/16,
-				9*PI/16,
-				15*PI/16,
-				PI
-			];
 			var attack_angles = [
 				-PI, -3*PI/4, -PI/2, -PI/4, 0, PI/4, PI/2, 3*PI/4, PI
 			]
@@ -92,6 +88,7 @@ func _physics_process(delta):
 			
 			var rounded_angle = current;
 			print(rounded_angle);
+			$SlashArea.rotation = rounded_angle;
 
 func _process(delta):
 	#print(stamina);

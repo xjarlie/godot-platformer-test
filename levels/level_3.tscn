@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fpeddlqhu4gb"]
+[gd_scene load_steps=11 format=3 uid="uid://fpeddlqhu4gb"]
 
 [ext_resource type="Script" path="res://levels/level_3.gd" id="1_2kxt3"]
 [ext_resource type="Texture2D" uid="uid://dgap24b5wkf52" path="res://assets/parallax_bg.png" id="1_27e0o"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dxituydaltywq" path="res://utilities/platforms/platform_3.tscn" id="4_14iw2"]
 [ext_resource type="PackedScene" uid="uid://dwovinxbr4ic2" path="res://utilities/platforms/ground_1.tscn" id="5_yud55"]
 [ext_resource type="PackedScene" uid="uid://ct5p6hde3qmj6" path="res://utilities/nature_blocker.tscn" id="7_vjkf5"]
+[ext_resource type="PackedScene" uid="uid://bjw6xvl3m5db5" path="res://characters/goon.tscn" id="8_6avjh"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rhh4w"]
 
@@ -107,5 +108,8 @@ force_field_radius = 200
 [node name="NatureBlocker2" parent="." instance=ExtResource("7_vjkf5")]
 position = Vector2(2640, 695)
 force_field_radius = 200
+
+[node name="Goon" parent="." instance=ExtResource("8_6avjh")]
+position = Vector2(902, 1176)
 
 [connection signal="body_entered" from="WinArea" to="." method="_on_win_area_body_entered"]
