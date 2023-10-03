@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://docmwitkx5h8r"]
+[gd_scene load_steps=7 format=3 uid="uid://docmwitkx5h8r"]
 
 [ext_resource type="Script" path="res://characters/spirit.gd" id="1_qp7jx"]
 [ext_resource type="PackedScene" uid="uid://buma1gi277ucy" path="res://utilities/platform.tscn" id="2_hf4fn"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_j4hsc"]
-size = Vector2(32, 32)
+[ext_resource type="SpriteFrames" uid="uid://d2ar2walt5ppl" path="res://assets/moon_spirit/spirit_animation.tres" id="3_hnav5"]
+[ext_resource type="Script" path="res://characters/spirit_animation.gd" id="15_do75g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u02wo"]
 radius = 16.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u11jo"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
 
 [node name="Spirit" type="CharacterBody2D" groups=["spirit"]]
 collision_layer = 4
@@ -16,15 +22,18 @@ input_pickable = true
 script = ExtResource("1_qp7jx")
 platform_scene = ExtResource("2_hf4fn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("PlaceholderTexture2D_j4hsc")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u02wo")
 
 [node name="MoonPlatform" parent="." instance=ExtResource("2_hf4fn")]
 scale = Vector2(0.4, 0.7)
 collision_layer = 8
+
+[node name="ColorRect" parent="MoonPlatform" index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="MoonPlatform" index="1"]
+position = Vector2(5, 0)
 
 [node name="SlashArea" type="Area2D" parent="."]
 collision_layer = 512
@@ -35,5 +44,21 @@ rotation = 6.28319
 scale = Vector2(6.90119, 6.90119)
 polygon = PackedVector2Array(0, 0, 10, 4.5, 10, -4.5)
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4.76837e-07)
+scale = Vector2(0.285714, 0.285714)
+sprite_frames = ExtResource("3_hnav5")
+animation = &"spirit-to-platform"
+offset = Vector2(5, 9)
+script = ExtResource("15_do75g")
+
+[node name="TrailEmitter" type="GPUParticles2D" parent="."]
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_u11jo")
+lifetime = 10.0
+trail_enabled = true
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+
+[editable path="MoonPlatform"]

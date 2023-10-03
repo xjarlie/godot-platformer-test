@@ -3,7 +3,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5r77s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4tdit"]
-size = Vector2(256, 32)
+size = Vector2(285, 32)
 
 [node name="Platform" type="RigidBody2D"]
 collision_layer = 2

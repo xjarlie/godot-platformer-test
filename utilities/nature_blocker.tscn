@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct5p6hde3qmj6"]
+[gd_scene load_steps=4 format=3 uid="uid://ct5p6hde3qmj6"]
 
 [ext_resource type="Script" path="res://utilities/nature_blocker.gd" id="1_qs4p5"]
+[ext_resource type="Texture2D" uid="uid://bkyvxllymng78" path="res://assets/circle.png" id="2_ua5a6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hgs5i"]
 resource_local_to_scene = true
@@ -8,7 +9,6 @@ radius = 32.0
 
 [node name="NatureBlocker" type="Area2D" groups=["nature_blocker"]]
 script = ExtResource("1_qs4p5")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color(0.709804, 0, 0.709804, 1)
@@ -33,6 +33,13 @@ wait_time = 2.0
 
 [node name="DamageTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.352941, 1)
+z_index = -1
+position = Vector2(3.8147e-06, 0)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_ua5a6")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

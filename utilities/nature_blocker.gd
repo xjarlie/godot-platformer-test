@@ -18,6 +18,8 @@ var disabled = false;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$CollisionShape2D.shape.radius = force_field_radius;
+	$Sprite2D.scale.x = force_field_radius / 32 * 0.22;
+	$Sprite2D.scale.y = $Sprite2D.scale.x;
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

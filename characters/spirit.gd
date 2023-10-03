@@ -93,6 +93,10 @@ func _physics_process(delta):
 func _process(delta):
 	#print(stamina);
 	
+	if (state == STATES.MOVE):
+		#$TrailEmitter.process_material.direction = velocity.angle();
+		pass;
+	
 	if (gameState.left_action != "platform"):
 		#hide();
 		pass;
@@ -103,18 +107,18 @@ func _process(delta):
 		if (gameState.left_action == "platform"):
 			if (touching_mouse && stamina > 0):
 				state = STATES.STATIC;
-			
+
 				$MoonPlatform.show();
 				$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", false);
-				$Sprite2D.hide();
+				$AnimatedSprite2D.update_animation("spirit-to-platform");
 			
 			if (state == STATES.STATIC):
-				if (stamina == 0):
+				if (stamina < -5):
 					state = STATES.MOVE;
 			
 					$MoonPlatform.hide();
 					$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", true);
-					$Sprite2D.show();
+					$AnimatedSprite2D.update_animation("platform-to-spirit");
 			
 	if (Input.is_action_just_released("left_click")):
 		if (gameState.left_action == "platform"):
@@ -122,7 +126,7 @@ func _process(delta):
 			
 			$MoonPlatform.hide();
 			$MoonPlatform.get_node("CollisionShape2D").set_deferred("disabled", true);
-			$Sprite2D.show();
+			$AnimatedSprite2D.update_animation("platform-to-spirit");
 
 func regen_stamina(amt):
 	if (stamina + amt > STARTING_STAMINA):
