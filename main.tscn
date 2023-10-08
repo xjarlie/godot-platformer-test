@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://c5tngn823lbq2" path="res://UI/radial_action_select.tscn" id="7_2l3jm"]
 [ext_resource type="PackedScene" uid="uid://d3jpfmrelhywk" path="res://UI/ui.tscn" id="7_d1uob"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_6rp2u"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_f5vte"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_8mp6e"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_irlsn"]
 
 [node name="Main" type="Node"]
 process_mode = 1
@@ -31,8 +31,8 @@ visible = false
 
 [node name="RadialActionSelect" parent="." instance=ExtResource("7_2l3jm")]
 visible = false
-left_action_group = SubResource("ButtonGroup_6rp2u")
-right_action_group = SubResource("ButtonGroup_8mp6e")
+left_action_group = SubResource("ButtonGroup_f5vte")
+right_action_group = SubResource("ButtonGroup_irlsn")
 
 [connection signal="death" from="Player" to="." method="_on_player_death"]
 [connection signal="restart" from="PauseMenu" to="." method="_on_pause_menu_restart"]
