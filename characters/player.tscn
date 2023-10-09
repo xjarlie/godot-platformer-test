@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://f2esgyghoibm"]
+[gd_scene load_steps=6 format=3 uid="uid://f2esgyghoibm"]
 
 [ext_resource type="Script" path="res://characters/player.gd" id="1_gm1ia"]
 [ext_resource type="Texture2D" uid="uid://olqxhgvjuh1q" path="res://assets/rightbig.png" id="2_04pbh"]
+[ext_resource type="PackedScene" uid="uid://c02pu1im8ua78" path="res://utilities/javelin.tscn" id="2_axwoy"]
 [ext_resource type="Script" path="res://characters/player_camera.gd" id="3_ohe28"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ect4e"]
@@ -11,6 +12,7 @@ height = 128.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 11
 script = ExtResource("1_gm1ia")
+javelin = ExtResource("2_axwoy")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

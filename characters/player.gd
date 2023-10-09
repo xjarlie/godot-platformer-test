@@ -7,6 +7,9 @@ signal death;
 @export_range(0.0, 1.0) var friction = 0.4;
 @export_range(0.0, 1.0) var acceleration = 0.25;
 @export var gravity = 3000;
+@export var javelin: PackedScene;
+var javelin_charging = false;
+var javelin_charge = 0;
 
 @export var max_health = 100;
 var health = max_health;
@@ -17,6 +20,7 @@ var health = max_health;
 enum states {IDLE, RUN, JUMP};
 var last_on_floor = 0;
 var mercy_frames = 6;
+
 
 func begin():
 	health = max_health;
@@ -31,6 +35,9 @@ func _physics_process(delta):
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and (CURRENT_FRAME < last_on_floor + mercy_frames):
 		velocity.y += -JUMP_SPEED
+		
+	if javelin_charging:
+		javelin_charge += 1;
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -75,3 +82,16 @@ func die():
 
 func is_on_solid_ground():
 	return (is_on_floor() && get_last_slide_collision() && get_last_slide_collision().get_collider().get_groups().has("solid_platform"));
+	
+func begin_javelin():
+	javelin_charging = true;
+	
+	
+func release_javelin():
+	var instance = javelin.instantiate();
+	get_tree().get_root().add_child(instance);
+	var direction_to_mouse = (get_global_mouse_position() - position).normalized();
+	instance.release(javelin_charge, direction_to_mouse, position);
+	javelin_charging = false;
+	javelin_charge = 0;
+	print("jav end");

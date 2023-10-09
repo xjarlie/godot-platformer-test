@@ -78,3 +78,10 @@ func _on_radial_action_select_left_action_updated(action):
 
 func _on_radial_action_select_right_action_updated(action):
 	update_moon_spirit_right_action(action);
+
+
+func _on_spirit_javelin_start():
+	$Player.begin_javelin();
+
+func _on_spirit_javelin_release():
+	$Player.release_javelin();

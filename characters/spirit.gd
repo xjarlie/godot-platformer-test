@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 @export var platform_scene: PackedScene;
 
+signal javelin_start;
+signal javelin_release;
+
 var acceleration = 5000;
 var max_speed = 1000;
 var high_max_speed = 4000;
@@ -89,6 +92,13 @@ func _physics_process(delta):
 			var rounded_angle = current;
 			print(rounded_angle);
 			$SlashArea.rotation = rounded_angle;
+	
+	if (Input.is_action_just_pressed("right_click")):
+		if (gameState.right_action == "javelin"):
+			javelin_start.emit();
+	if (Input.is_action_just_released("right_click")):
+		if (gameState.right_action == "javelin"):
+			javelin_release.emit();
 
 func _process(delta):
 	#print(stamina);

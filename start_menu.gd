@@ -22,3 +22,10 @@ func _on_story_pressed():
 	$Control/LoadingControl.show();
 	loading = "res://main.tscn";
 	ResourceLoader.load_threaded_request(loading);
+
+
+func _on_time_trial_pressed():
+	$Control/ButtonControl.hide();
+	$Control/LoadingControl.show();
+	loading = "res://time_trial_main.tscn";
+	ResourceLoader.load_threaded_request(loading);

@@ -25,6 +25,7 @@ left_action_group = ExtResource("1_d4cid")
 right_action_group = ExtResource("2_kshkx")
 
 [node name="PlatformOption" type="Button" parent="." groups=["platform"]]
+layout_mode = 0
 offset_left = -148.0
 offset_top = -20.0
 offset_right = -72.0
@@ -34,6 +35,7 @@ button_group = ExtResource("1_d4cid")
 text = "Platform"
 
 [node name="SlashOption" type="Button" parent="." groups=["slash"]]
+layout_mode = 0
 offset_left = -140.0
 offset_top = -76.0
 offset_right = -91.0
@@ -43,6 +45,7 @@ button_group = ExtResource("1_d4cid")
 text = "Slash"
 
 [node name="JavelinOption" type="Button" parent="." groups=["javelin"]]
+layout_mode = 0
 offset_left = 92.0
 offset_top = -20.0
 offset_right = 151.0
@@ -52,6 +55,7 @@ button_group = ExtResource("2_kshkx")
 text = "Javelin"
 
 [node name="OrbOption" type="Button" parent="." groups=["orb"]]
+layout_mode = 0
 offset_left = 100.0
 offset_top = -76.0
 offset_right = 138.0
@@ -61,6 +65,7 @@ button_group = ExtResource("2_kshkx")
 text = "Orb"
 
 [node name="LeftLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = -148.0
 offset_top = -108.0
 offset_right = -65.0
@@ -68,6 +73,7 @@ offset_bottom = -82.0
 text = "Left action"
 
 [node name="RightLabel" type="Label" parent="."]
+layout_mode = 0
 offset_left = 68.0
 offset_top = -108.0
 offset_right = 164.0

@@ -105,3 +105,4 @@ scale = Vector2(3, 3)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="pressed" from="Control/ButtonControl/Story" to="." method="_on_story_pressed"]
+[connection signal="pressed" from="Control/ButtonControl/Time Trial" to="." method="_on_time_trial_pressed"]

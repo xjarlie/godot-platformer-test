@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://doys6dkfpneic"]
+
+[node name="Time Trial Main" type="Node"]
+
+[node name="LevelSelect" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="LevelSelect"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Level 1" type="Button" parent="LevelSelect"]
+offset_right = 8.0
+offset_bottom = 16.0
+size_flags_horizontal = 4
+text = "Level 1"
