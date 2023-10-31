@@ -17,7 +17,6 @@ func release(crg: int, direction: Vector2, pos: Vector2):
 	position = pos;
 	
 func _physics_process(delta):
-	print(charge, position);
 	if charge != 0:
 		position += velocity * delta;
 		charge -= 1;
