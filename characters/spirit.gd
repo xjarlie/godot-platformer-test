@@ -17,6 +17,9 @@ var touching_mouse = false;
 const STARTING_STAMINA = 200;
 var stamina = STARTING_STAMINA;
 
+@export var slash_damage = 10;
+var slash_in_progress = false;
+
 var gameState = {
 	"left_action": "platform",
 	"right_action": "orb"
@@ -26,6 +29,7 @@ func _ready():
 	begin();
 
 func begin():
+	$SlashSprite.hide();
 	$MoonPlatform.hide();
 	$MoonPlatform.get_node("CollisionShape2D").disabled = true;
 	position = Vector2.ZERO;
@@ -92,6 +96,18 @@ func _physics_process(delta):
 			var rounded_angle = current;
 			print(rounded_angle);
 			$SlashArea.rotation = rounded_angle;
+			$SlashSprite.rotation = rounded_angle - PI/8;
+			rotate_slash_sprite(PI/4, 0.1);
+			
+			# Check for damage dealt
+			var bodies = $SlashArea.get_overlapping_bodies();
+			print(bodies);
+			for body in bodies:
+				if (body.is_in_group("goon")):
+					body.damage(slash_damage);
+			
+		else:
+			slash_in_progress = false;
 	
 	if (Input.is_action_just_pressed("right_click")):
 		if (gameState.right_action == "javelin"):
@@ -150,3 +166,20 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	touching_mouse = false;
+
+var slash_sprite_rotating = false;
+func rotate_slash_sprite(total_amount, time):
+	if (slash_sprite_rotating):
+		return;
+		
+	const INTERVAL = 0.01;
+	var repeats = round(time / INTERVAL);
+	var amount = total_amount / repeats;
+	
+	slash_sprite_rotating = true;
+	$SlashSprite.show();
+	for i in range(0, repeats):
+		$SlashSprite.rotate(amount);
+		await get_tree().create_timer(INTERVAL).timeout;
+	$SlashSprite.hide();
+	slash_sprite_rotating = false;

@@ -56,7 +56,7 @@ func _physics_process(delta):
 		
 	move_and_slide();
 	resolve_health();
-	
+
 func _process(_delta):
 	if (Input.is_action_pressed("move_down") && is_on_floor()):
 		$Camera2D.offset.y = lerp($Camera2D.offset.y, 200.0, 0.03);

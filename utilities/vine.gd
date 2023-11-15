@@ -17,11 +17,11 @@ func _ready():
 func _process(_delta):
 	current_angle = clamp(current_angle, 0, 2*PI);
 	$Sprite2D.global_rotation = current_angle;
-	
+
 func _physics_process(delta):
 	var angle_from_rest: float = current_angle - PI/2;
 	if (round(angle_from_rest*10) != 0):		
-		angular_velocity += lerp(angular_velocity, -MAX_ANGULAR_SPEED*sign(angle_from_rest), 0.1);
+		angular_velocity = lerp(angular_velocity, -MAX_ANGULAR_SPEED*sign(angle_from_rest), 0.1);
 		current_angle += angular_velocity * delta;
 
 func add_velocity(v: Vector2):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://docmwitkx5h8r"]
+[gd_scene load_steps=8 format=3 uid="uid://docmwitkx5h8r"]
 
 [ext_resource type="Script" path="res://characters/spirit.gd" id="1_qp7jx"]
 [ext_resource type="PackedScene" uid="uid://buma1gi277ucy" path="res://utilities/platform.tscn" id="2_hf4fn"]
@@ -14,6 +14,8 @@ direction = Vector3(0, 0, 0)
 gravity = Vector3(0, 0, 0)
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4pq32"]
 
 [node name="Spirit" type="CharacterBody2D" groups=["spirit"]]
 collision_layer = 4
@@ -35,15 +37,6 @@ visible = false
 [node name="CollisionShape2D" parent="MoonPlatform" index="1"]
 position = Vector2(5, 0)
 
-[node name="SlashArea" type="Area2D" parent="."]
-collision_layer = 512
-collision_mask = 256
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlashArea"]
-rotation = 6.28319
-scale = Vector2(6.90119, 6.90119)
-polygon = PackedVector2Array(0, 0, 10, 4.5, 10, -4.5)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4.76837e-07)
 scale = Vector2(0.285714, 0.285714)
@@ -58,7 +51,24 @@ process_material = SubResource("ParticleProcessMaterial_u11jo")
 lifetime = 10.0
 trail_enabled = true
 
+[node name="SlashArea" type="Area2D" parent="."]
+collision_layer = 512
+collision_mask = 256
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlashArea"]
+position = Vector2(0, 1.90735e-06)
+rotation = 6.28319
+scale = Vector2(10.5579, 10.5579)
+polygon = PackedVector2Array(0, 0, 10, 4.5, 10, -4.5)
+
+[node name="SlashSprite" type="Sprite2D" parent="."]
+position = Vector2(-2.62698e-06, 1.7228e-07)
+scale = Vector2(113.839, 12)
+texture = SubResource("PlaceholderTexture2D_4pq32")
+offset = Vector2(0.5, 0)
+
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="body_entered" from="SlashArea" to="." method="_on_slash_area_body_entered"]
 
 [editable path="MoonPlatform"]
