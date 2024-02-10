@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://docmwitkx5h8r"]
+[gd_scene load_steps=9 format=3 uid="uid://docmwitkx5h8r"]
 
 [ext_resource type="Script" path="res://characters/spirit.gd" id="1_qp7jx"]
 [ext_resource type="PackedScene" uid="uid://buma1gi277ucy" path="res://utilities/platform.tscn" id="2_hf4fn"]
 [ext_resource type="SpriteFrames" uid="uid://d2ar2walt5ppl" path="res://assets/moon_spirit/spirit_animation.tres" id="3_hnav5"]
+[ext_resource type="Texture2D" uid="uid://b0smvkrag7dji" path="res://assets/point_light.webp" id="5_hk03j"]
 [ext_resource type="Script" path="res://characters/spirit_animation.gd" id="15_do75g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u02wo"]
@@ -37,6 +38,11 @@ visible = false
 [node name="CollisionShape2D" parent="MoonPlatform" index="1"]
 position = Vector2(5, 0)
 
+[node name="PointLight2D" type="PointLight2D" parent="MoonPlatform"]
+position = Vector2(0, 7.62939e-06)
+scale = Vector2(1.5, 0.2)
+texture = ExtResource("5_hk03j")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4.76837e-07)
 scale = Vector2(0.285714, 0.285714)
@@ -66,6 +72,9 @@ position = Vector2(-2.62698e-06, 1.7228e-07)
 scale = Vector2(113.839, 12)
 texture = SubResource("PlaceholderTexture2D_4pq32")
 offset = Vector2(0.5, 0)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("5_hk03j")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
